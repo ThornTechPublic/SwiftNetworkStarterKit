@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <scenes>
-        <!--Apps-->
+        <!--View Controller-->
         <scene sceneID="pcG-8C-SAa">
             <objects>
                 <tableViewController id="Ihz-h7-Mvf" customClass="ViewController" customModule="networkMashup" customModuleProvider="target" sceneMemberID="viewController">
@@ -25,7 +25,17 @@
                             <outlet property="delegate" destination="Ihz-h7-Mvf" id="ajt-vG-fJ0"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Apps" id="jAn-1L-Wlz"/>
+                    <navigationItem key="navigationItem" id="jAn-1L-Wlz">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="FCM-SP-cLd">
+                            <rect key="frame" x="96" y="7" width="128" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Free"/>
+                                <segment title="Paid"/>
+                            </segments>
+                        </segmentedControl>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aJy-le-gU3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
