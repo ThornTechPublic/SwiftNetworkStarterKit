@@ -19,6 +19,7 @@ class ViewController: UITableViewController {
                 let json = JSON(data!)
                 let iTunesStore = json["feed"]["author"]["name"]["label"].string
                 println("iTunesStore:: \(iTunesStore)")
+                self.tableView.reloadData()
             }
         
     }
@@ -28,6 +29,20 @@ class ViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
 }
 
+// MARK: - UITableViewDataSource methods
+
+extension ViewController {
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
+        cell.textLabel?.text = "hi"
+        return cell
+    }
+    
+}
