@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UITableViewController {
 
+    var appCollectionResponse = [AppItem]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -19,7 +21,10 @@ class ViewController: UITableViewController {
                 let json = JSON(data!)
                 let feedArray = json["feed"]["entry"]
                 println("feedArray:: \(feedArray)")
-
+                self.appCollectionResponse = []
+                for (_, appItem) in feedArray {
+                    self.appCollectionResponse.append(AppItem(appObject: appItem))
+                }
                 self.tableView.reloadData()
             }
         
@@ -37,12 +42,12 @@ class ViewController: UITableViewController {
 extension ViewController {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return appCollectionResponse.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
-        cell.textLabel?.text = "hi"
+        cell.textLabel?.text = appCollectionResponse[indexPath.row].name ?? "no name in json response"
         return cell
     }
     
