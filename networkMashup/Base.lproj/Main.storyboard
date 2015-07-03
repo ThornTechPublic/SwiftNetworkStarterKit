@@ -34,6 +34,9 @@
                                 <segment title="Free"/>
                                 <segment title="Paid"/>
                             </segments>
+                            <connections>
+                                <action selector="freeOrPaid:" destination="Ihz-h7-Mvf" eventType="valueChanged" id="aGx-vd-82o"/>
+                            </connections>
                         </segmentedControl>
                     </navigationItem>
                 </tableViewController>

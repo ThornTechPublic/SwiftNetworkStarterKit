@@ -12,6 +12,10 @@ class ViewController: UITableViewController {
 
     var appCollectionResponse = [AppItem]()
     
+    @IBAction func freeOrPaid(sender: UISegmentedControl) {
+        println(sender.selectedSegmentIndex)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
