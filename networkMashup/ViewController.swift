@@ -17,8 +17,9 @@ class ViewController: UITableViewController {
         request(.GET, "https://itunes.apple.com/us/rss/topfreeapplications/limit=10/json", parameters: nil, encoding: .JSON)
             .responseJSON { (request, response, data, error) in
                 let json = JSON(data!)
-                let iTunesStore = json["feed"]["author"]["name"]["label"].string
-                println("iTunesStore:: \(iTunesStore)")
+                let feedArray = json["feed"]["entry"]
+                println("feedArray:: \(feedArray)")
+
                 self.tableView.reloadData()
             }
         
