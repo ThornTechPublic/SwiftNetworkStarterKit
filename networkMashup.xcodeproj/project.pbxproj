@@ -21,6 +21,7 @@
 		FC6263A91B4746C900EAD10B /* ResponseSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6263A11B4746C900EAD10B /* ResponseSerialization.swift */; };
 		FC6263AA1B4746C900EAD10B /* Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6263A21B4746C900EAD10B /* Upload.swift */; };
 		FC6263AB1B4746C900EAD10B /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6263A31B4746C900EAD10B /* Validation.swift */; };
+		FC6263AD1B4748FF00EAD10B /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6263AC1B4748FF00EAD10B /* SwiftyJSON.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		FC6263A11B4746C900EAD10B /* ResponseSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseSerialization.swift; sourceTree = "<group>"; };
 		FC6263A21B4746C900EAD10B /* Upload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Upload.swift; sourceTree = "<group>"; };
 		FC6263A31B4746C900EAD10B /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
+		FC6263AC1B4748FF00EAD10B /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 		FC6263781B47457B00EAD10B /* networkMashup */ = {
 			isa = PBXGroup;
 			children = (
+				FC6263AC1B4748FF00EAD10B /* SwiftyJSON.swift */,
 				FC62639B1B4746B400EAD10B /* AlamoFire */,
 				FC62637B1B47457B00EAD10B /* AppDelegate.swift */,
 				FC62637D1B47457B00EAD10B /* ViewController.swift */,
@@ -247,6 +250,7 @@
 				FC6263AA1B4746C900EAD10B /* Upload.swift in Sources */,
 				FC6263A71B4746C900EAD10B /* ParameterEncoding.swift in Sources */,
 				FC6263A41B4746C900EAD10B /* Alamofire.swift in Sources */,
+				FC6263AD1B4748FF00EAD10B /* SwiftyJSON.swift in Sources */,
 				FC6263A51B4746C900EAD10B /* Download.swift in Sources */,
 				FC6263A91B4746C900EAD10B /* ResponseSerialization.swift in Sources */,
 				FC62637E1B47457B00EAD10B /* ViewController.swift in Sources */,
