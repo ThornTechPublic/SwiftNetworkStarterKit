@@ -8,6 +8,7 @@
 
 import Foundation
 
+// This is the model that yanks out the string and image URL from the API response.
 class AppItem {
     
     var imageURLString:String? = nil

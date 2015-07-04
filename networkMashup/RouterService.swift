@@ -37,6 +37,7 @@ class RouterService {
         case CreatePost(params: [String: AnyObject])
         case CreateMultipart(contentType: String, payload: NSMutableData)
         
+        // each case above needs to be implemented here.
         var URLRequest: NSURLRequest {
             // generate HTTP verbs, URL paths, and parameters
             let (verb: String, path: String, parameters: [String: AnyObject]?) = {
@@ -58,18 +59,23 @@ class RouterService {
             let URL = NSURL(string: path)!
             let URLRequest = NSMutableURLRequest(URL: URL)
             URLRequest.HTTPMethod = verb
+            // some nice defaults to have
             URLRequest.cachePolicy = .ReloadIgnoringLocalCacheData
             URLRequest.timeoutInterval = 60.0
             
+            // handle GET, POST, and multipart POST differently
             switch self {
+            // POST needs JSON encoding of params
             case .CreatePost:
                 // JSON encode the parameters
                 return ParameterEncoding.JSON.encode(URLRequest, parameters: parameters).0
+            // Multipart POST needs a special "Content-Type" header to define the boundary between JSON and Image Data.
             case .CreateMultipart(let contentType, let payload):
                 // Multipart form.  Set content type and pass along the body (NSData).  JSON params are embedded in data.
                 URLRequest.setValue(contentType, forHTTPHeaderField: "Content-Type")
                 URLRequest.HTTPBody = payload
                 return URLRequest
+            // Everything else is GET.  The JSON gets URL encoded.
             default:
                 // URL encode into GET parameters for everything else
                 return ParameterEncoding.URL.encode(URLRequest, parameters: parameters).0
@@ -78,6 +84,10 @@ class RouterService {
         }
     }
     
+    // These are the methods called by your app.
+    // Each one has a success flag in the callback.
+    
+    // GET top 10 free apps
     func fetchTopFree(callback: (Bool, [AppItem]) -> Void) {
         request(Router.FetchTopFree())
             .responseJSON() { (request, response, data, error) in
@@ -87,6 +97,7 @@ class RouterService {
                 } else {
                     // convert the response using swiftyJSON
                     let json = JSON(data!)
+                    // apple structures the array of apps in feed.entry
                     let feedArray = json["feed"]["entry"]
                     // load up the app item objects into an array and pass it to the callback
                     var appCollectionResponse = [AppItem]()
@@ -98,6 +109,7 @@ class RouterService {
         }
     }
     
+    // GET top 10 paid apps
     func fetchTopPaid(callback: (Bool, [AppItem]) -> Void) {
         request(Router.FetchTopPaid())
             .responseJSON() { (request, response, data, error) in
@@ -107,6 +119,7 @@ class RouterService {
                 } else {
                     // convert the response using swiftyJSON
                     let json = JSON(data!)
+                    // apple structures the array of apps in feed.entry
                     let feedArray = json["feed"]["entry"]
                     // load up the app item objects into an array and pass it to the callback
                     var appCollectionResponse = [AppItem]()
@@ -118,7 +131,9 @@ class RouterService {
         }
     }
     
+    // POST to httpbin.org
     func createPost(callback: Bool -> Void){
+        // hard-coding params just to show you how it works.
         var parameters:[String: AnyObject] = [
             "title": "foo",
             "description": "bar"
@@ -137,8 +152,10 @@ class RouterService {
         }
     }
     
+    // Multipart POST to httpbin.org
     func createMultipart(image: UIImage, callback: Bool -> Void){
-        
+        // hard-coding params just to show you how it works.
+
         // use SwiftyJSON to convert a dictionary to JSON
         var parameterJSON = JSON([
             "title": "foo",
@@ -157,8 +174,11 @@ class RouterService {
         let fieldName = "file"
         
         let imageData = UIImageJPEGRepresentation(image, 0.7)
+        
+        // Example of what it might look like:
+        
         //            -----------------------------126394370319358019764645774
-        //            Content-Disposition: form-data; name="someForm"; filename="blob"
+        //            Content-Disposition: form-data;
         //            Content-Type: application/json
         //
         //            { "title":"foo", "description":"bar" }
@@ -169,6 +189,9 @@ class RouterService {
         // Set data
         var error: NSError?
         var dataString = NSMutableData()
+        // This "appendString" method is not a real method.
+        // We're using an extension on NSMutableData (scroll down to the bottom).
+        // It makes the code easier to read.
         dataString.appendString("--\(boundaryConstant)")
         dataString.appendString("\r\n")
         dataString.appendString("Content-Disposition: form-data;")
@@ -220,7 +243,9 @@ extension Request {
                 return (nil, nil)
             }
             
-            // cache only if the image downloaded completely
+            // Cache only if the image downloaded completely.  Otherwise, you end up caching corrupt images in poor network situations.
+            // Check if the Content-Length exactly matches the data.length.
+            // Remember there are two lines in the AppDelegate to setup the NSURLCache.
             if let contentLength = response?.allHeaderFields["Content-Length"] as? String {
                 if let data = data {
                     if contentLength == "\(data.length)" {
