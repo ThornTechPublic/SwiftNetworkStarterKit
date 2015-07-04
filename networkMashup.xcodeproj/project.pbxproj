@@ -99,8 +99,6 @@
 		FC6263781B47457B00EAD10B /* networkMashup */ = {
 			isa = PBXGroup;
 			children = (
-				FC6263AC1B4748FF00EAD10B /* SwiftyJSON.swift */,
-				FC62639B1B4746B400EAD10B /* AlamoFire */,
 				FC62637B1B47457B00EAD10B /* AppDelegate.swift */,
 				FC62637D1B47457B00EAD10B /* ViewController.swift */,
 				FC6263AE1B474C4D00EAD10B /* AppItem.swift */,
@@ -108,6 +106,7 @@
 				FC62637F1B47457B00EAD10B /* Main.storyboard */,
 				FC6263821B47457B00EAD10B /* Images.xcassets */,
 				FC6263841B47457B00EAD10B /* LaunchScreen.xib */,
+				FC6263B21B476CAE00EAD10B /* Libraries */,
 				FC6263791B47457B00EAD10B /* Supporting Files */,
 			);
 			path = networkMashup;
@@ -151,6 +150,15 @@
 				FC6263A31B4746C900EAD10B /* Validation.swift */,
 			);
 			name = AlamoFire;
+			sourceTree = "<group>";
+		};
+		FC6263B21B476CAE00EAD10B /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				FC6263AC1B4748FF00EAD10B /* SwiftyJSON.swift */,
+				FC62639B1B4746B400EAD10B /* AlamoFire */,
+			);
+			name = Libraries;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
