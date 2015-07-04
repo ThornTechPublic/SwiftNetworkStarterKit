@@ -38,6 +38,11 @@
                                 <action selector="freeOrPaid:" destination="Ihz-h7-Mvf" eventType="valueChanged" id="aGx-vd-82o"/>
                             </connections>
                         </segmentedControl>
+                        <barButtonItem key="rightBarButtonItem" title="Post" id="fai-9i-0He">
+                            <connections>
+                                <action selector="postButton:" destination="Ihz-h7-Mvf" id="62O-C8-d9A"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aJy-le-gU3" userLabel="First Responder" sceneMemberID="firstResponder"/>

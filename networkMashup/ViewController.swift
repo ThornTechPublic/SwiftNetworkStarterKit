@@ -24,6 +24,18 @@ class ViewController: UITableViewController {
         
     }
     
+    @IBAction func postButton(sender: AnyObject) {
+        RouterService.sharedInstance.createPost { success in
+            if success {
+                let alertView = UIAlertView()
+                alertView.title = "Success"
+                alertView.message = "Check out the println statements for the json response"
+                alertView.addButtonWithTitle("Ok")
+                alertView.show()
+            }
+        }
+    }
+    
     func fetchTopFree(){
         RouterService.sharedInstance.fetchTopFree(){ success, appCollection in
             self.appCollectionResponse = appCollection
@@ -58,7 +70,6 @@ extension ViewController {
         cell.textLabel?.text = appCollectionResponse[indexPath.row].name ?? "no name in json response"
         cell.imageView?.image = UIImage(named: "apple")
         if let appImage = appCollectionResponse[indexPath.row].imageURLString {
-            println("appImage:: \(appImage)")
             request(.GET, appImage)
                 .responseImage() { (request, _, image, error) in
                     if error == nil && image != nil {
