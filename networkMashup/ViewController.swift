@@ -56,6 +56,7 @@ extension ViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
         cell.textLabel?.text = appCollectionResponse[indexPath.row].name ?? "no name in json response"
+        cell.imageView?.image = UIImage(named: "apple")
         if let appImage = appCollectionResponse[indexPath.row].imageURLString {
             println("appImage:: \(appImage)")
             request(.GET, appImage)
