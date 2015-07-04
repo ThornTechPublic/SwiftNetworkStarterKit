@@ -23,6 +23,7 @@
 		FC6263AB1B4746C900EAD10B /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6263A31B4746C900EAD10B /* Validation.swift */; };
 		FC6263AD1B4748FF00EAD10B /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6263AC1B4748FF00EAD10B /* SwiftyJSON.swift */; };
 		FC6263AF1B474C4D00EAD10B /* AppItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6263AE1B474C4D00EAD10B /* AppItem.swift */; };
+		FC6263B11B475B9100EAD10B /* RouterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6263B01B475B9100EAD10B /* RouterService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		FC6263A31B4746C900EAD10B /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 		FC6263AC1B4748FF00EAD10B /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		FC6263AE1B474C4D00EAD10B /* AppItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppItem.swift; sourceTree = "<group>"; };
+		FC6263B01B475B9100EAD10B /* RouterService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				FC62637B1B47457B00EAD10B /* AppDelegate.swift */,
 				FC62637D1B47457B00EAD10B /* ViewController.swift */,
 				FC6263AE1B474C4D00EAD10B /* AppItem.swift */,
+				FC6263B01B475B9100EAD10B /* RouterService.swift */,
 				FC62637F1B47457B00EAD10B /* Main.storyboard */,
 				FC6263821B47457B00EAD10B /* Images.xcassets */,
 				FC6263841B47457B00EAD10B /* LaunchScreen.xib */,
@@ -259,6 +262,7 @@
 				FC6263A91B4746C900EAD10B /* ResponseSerialization.swift in Sources */,
 				FC62637E1B47457B00EAD10B /* ViewController.swift in Sources */,
 				FC6263A81B4746C900EAD10B /* Request.swift in Sources */,
+				FC6263B11B475B9100EAD10B /* RouterService.swift in Sources */,
 				FC62637C1B47457B00EAD10B /* AppDelegate.swift in Sources */,
 				FC6263AB1B4746C900EAD10B /* Validation.swift in Sources */,
 				FC6263A61B4746C900EAD10B /* Manager.swift in Sources */,

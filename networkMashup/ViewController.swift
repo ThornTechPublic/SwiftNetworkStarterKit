@@ -17,55 +17,30 @@ class ViewController: UITableViewController {
         
         switch sender.selectedSegmentIndex {
         case 0:
-            request(.GET, "https://itunes.apple.com/us/rss/topfreeapplications/limit=10/json", parameters: nil, encoding: .JSON)
-                .responseJSON { (request, response, data, error) in
-                    let json = JSON(data!)
-                    let feedArray = json["feed"]["entry"]
-                    println("feedArray:: \(feedArray)")
-                    self.appCollectionResponse = []
-                    for (_, appItem) in feedArray {
-                        self.appCollectionResponse.append(AppItem(appObject: appItem))
-                    }
-                    self.tableView.reloadData()
-                }
+            fetchTopFree()
         default:
-            request(.GET, "https://itunes.apple.com/us/rss/toppaidapplications/limit=10/json", parameters: nil, encoding: .JSON)
-                .responseJSON { (request, response, data, error) in
-                    let json = JSON(data!)
-                    let feedArray = json["feed"]["entry"]
-                    println("feedArray:: \(feedArray)")
-                    self.appCollectionResponse = []
-                    for (_, appItem) in feedArray {
-                        self.appCollectionResponse.append(AppItem(appObject: appItem))
-                    }
-                    self.tableView.reloadData()
-                }
-        
+            fetchTopPaid()
         }
         
     }
     
+    func fetchTopFree(){
+        RouterService.sharedInstance.fetchTopFree(){ success, appCollection in
+            self.appCollectionResponse = appCollection
+            self.tableView.reloadData()
+        }
+    }
+    
+    func fetchTopPaid(){
+        RouterService.sharedInstance.fetchTopPaid(){ success, appCollection in
+            self.appCollectionResponse = appCollection
+            self.tableView.reloadData()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        request(.GET, "https://itunes.apple.com/us/rss/topfreeapplications/limit=10/json", parameters: nil, encoding: .JSON)
-            .responseJSON { (request, response, data, error) in
-                let json = JSON(data!)
-                let feedArray = json["feed"]["entry"]
-                println("feedArray:: \(feedArray)")
-                self.appCollectionResponse = []
-                for (_, appItem) in feedArray {
-                    self.appCollectionResponse.append(AppItem(appObject: appItem))
-                }
-                self.tableView.reloadData()
-            }
-        
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        fetchTopFree()
     }
 
 }
