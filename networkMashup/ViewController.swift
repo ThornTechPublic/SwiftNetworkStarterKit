@@ -24,6 +24,19 @@ class ViewController: UITableViewController {
         
     }
     
+    @IBAction func multipartButton(sender: AnyObject) {
+        let appleImage = UIImage(named: "apple")
+        RouterService.sharedInstance.createMultipart(appleImage!, callback: { success in
+            if success {
+                let alertView = UIAlertView()
+                alertView.title = "Success"
+                alertView.message = "Check out the println statements for the json response"
+                alertView.addButtonWithTitle("Ok")
+                alertView.show()
+            }
+        })
+    }
+    
     @IBAction func postButton(sender: AnyObject) {
         RouterService.sharedInstance.createPost { success in
             if success {
