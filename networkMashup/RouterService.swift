@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Thorn Technologies. All rights reserved.
 //
 
+import UIKit
 import Foundation
 
 class RouterService {
@@ -94,4 +95,41 @@ class RouterService {
         }
     }
     
+}
+
+// MARK: - Alamofire Extension
+
+extension Request {
+    // see http://www.raywenderlich.com/85080/beginning-alamofire-tutorial
+    class func imageResponseSerializer() -> Serializer {
+        return { request, response, data in
+            
+            if data == nil || response == nil {
+                return (nil, nil)
+            }
+            
+            // cache only if the image downloaded completely
+            if let contentLength = response?.allHeaderFields["Content-Length"] as? String {
+                if let data = data {
+                    if contentLength == "\(data.length)" {
+                        // caches NSData response
+                        let cachedURLResponse = NSCachedURLResponse(response: response!, data: (data as NSData), userInfo: nil, storagePolicy: .Allowed)
+                        NSURLCache.sharedURLCache().storeCachedResponse(cachedURLResponse, forRequest: request)
+                    } else {
+                        println("dont cache this image!!!")
+                    }
+                }
+            }
+            
+            // scales the image to screen size
+            let image = UIImage(data: data!, scale: UIScreen.mainScreen().scale)
+            return (image, nil)
+        }
+    }
+    /// Turns Data into UIImage
+    func responseImage(completionHandler: (NSURLRequest, NSHTTPURLResponse?, UIImage?, NSError?) -> Void) -> Self {
+        return response(serializer: Request.imageResponseSerializer(), completionHandler: { (request, response, image, error) in
+            completionHandler(request, response, image as? UIImage, error)
+        })
+    }
 }
