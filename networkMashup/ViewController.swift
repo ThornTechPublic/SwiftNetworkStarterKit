@@ -14,6 +14,35 @@ class ViewController: UITableViewController {
     
     @IBAction func freeOrPaid(sender: UISegmentedControl) {
         println(sender.selectedSegmentIndex)
+        
+        switch sender.selectedSegmentIndex {
+        case 0:
+            request(.GET, "https://itunes.apple.com/us/rss/topfreeapplications/limit=10/json", parameters: nil, encoding: .JSON)
+                .responseJSON { (request, response, data, error) in
+                    let json = JSON(data!)
+                    let feedArray = json["feed"]["entry"]
+                    println("feedArray:: \(feedArray)")
+                    self.appCollectionResponse = []
+                    for (_, appItem) in feedArray {
+                        self.appCollectionResponse.append(AppItem(appObject: appItem))
+                    }
+                    self.tableView.reloadData()
+                }
+        default:
+            request(.GET, "https://itunes.apple.com/us/rss/toppaidapplications/limit=10/json", parameters: nil, encoding: .JSON)
+                .responseJSON { (request, response, data, error) in
+                    let json = JSON(data!)
+                    let feedArray = json["feed"]["entry"]
+                    println("feedArray:: \(feedArray)")
+                    self.appCollectionResponse = []
+                    for (_, appItem) in feedArray {
+                        self.appCollectionResponse.append(AppItem(appObject: appItem))
+                    }
+                    self.tableView.reloadData()
+                }
+        
+        }
+        
     }
     
     override func viewDidLoad() {
