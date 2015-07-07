@@ -28,3 +28,11 @@ Copy the two lines of code from `AppDelegate.swift` that sets up caching.
 Copy the `RouterService.swift`, and customize it for your own project.
 
 ## How it works
+
+### The Router
+
+### Image Caching
+
+### Multipart POST
+
+
