@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>7B4CA5D6-FB72-4864-9D02-932E77A0E159</string>
+	<key>IDESourceControlProjectName</key>
+	<string>networkMashup</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>DC27BFDBD0E5BC7A82BF74B23003C74DF3FAA482</key>
+		<string>https://github.com/ThornTechPublic/SwiftNetworkStarterKit.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>networkMashup.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>DC27BFDBD0E5BC7A82BF74B23003C74DF3FAA482</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/ThornTechPublic/SwiftNetworkStarterKit.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>DC27BFDBD0E5BC7A82BF74B23003C74DF3FAA482</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>DC27BFDBD0E5BC7A82BF74B23003C74DF3FAA482</string>
+			<key>IDESourceControlWCCName</key>
+			<string>networkMashup</string>
+		</dict>
+	</array>
+</dict>
+</plist>
