@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UITableViewController {
 
+    // use this to store the API response.
+    // just remember to clear it out when new data comes in.
     var appCollectionResponse = [AppItem]()
     
     // The segmented control was toggled.
