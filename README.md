@@ -109,7 +109,49 @@ We could have actually just done this:
 return URLRequest
 ```
 
-But `ParameterEncoding.URL.encode` will convert a Swift dictionary into URL parameters for GET requests.  The sample project makes use of JSON encoding for the POST HTTP body.  
+But if we actually had parameters, `ParameterEncoding.URL.encode` will convert a Swift dictionary `[ "foo" : "bar" ]` into URL parameters `?foo=bar` for GET requests.  
+
+The sample project makes use of AlamoFire's JSON encoding for the POST HTTP body.  
+
+The Router seems a little daunting at first.  But once you have the basic structure in place, it's pretty easy to add additional API calls.  The beauty of this is the ability to add tokens or set a timeoutInterval with a single point of change.
+
+### JSON Serialization
+
+Handling JSON objects with Swift can get pretty ugly.  SwiftyJSON makes life much easier.
+
+```
+request(Router.FetchTopFree())
+    .responseJSON() { (_, _, data, _) in
+        let json = JSON(data!)
+        let feedArray = json["feed"]["entry"]
+        println(feedArray)
+}
+```
+
+AlamoFire already gives us `.responseJSON()`.  We go a step further by converting it to a SwiftyJSON object:
+
+```
+        let json = JSON(data!)
+```
+
+This lets us reach deep into the JSON object without the dreaded `if-let` pyramid of doom.
+
+```
+        let feedArray = json["feed"]["entry"]
+```
+
+One neat trick with SwiftyJSON is the ability to turn a Swift dictionary into stringified JSON:
+
+```
+// use SwiftyJSON to convert a dictionary to JSON
+var parameterJSON = JSON([
+    "title": "foo",
+    "description": "bar"
+])
+
+// JSON stringify
+let parameterString = parameterJSON.rawString(encoding: NSUTF8StringEncoding, options: nil)
+```
 
 ### Image Serialization
 
