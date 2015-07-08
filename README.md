@@ -194,7 +194,7 @@ There are a few validations to make sure the image has downloaded completely bef
 
 ### [Multipart POST](https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L155)
 
-Multipart can be tediously to implement, if your API happens to use it.  Here's a (Stackoverflow article)[http://stackoverflow.com/questions/26162616/upload-image-with-parameters-in-swift] for more information.  
+Multipart can be tediously to implement, if your API happens to use it.  Here's a [Stackoverflow article](http://stackoverflow.com/questions/26162616/upload-image-with-parameters-in-swift) for more information.  
 
 Say you need to upload both an image and POST information like a title and description.  The image is binary, but the rest of the HTTP POST body is text.  
 
