@@ -186,13 +186,13 @@ request(.GET, "http://example.com/image")
     }
 ```
 
-This [same tutorial](http://www.raywenderlich.com/85080/beginning-alamofire-tutorial) and the [AlamoFire documentation](https://github.com/Alamofire/Alamofire#response-serialization) are good resources for more information.  
+This [previously mentioned tutorial](http://www.raywenderlich.com/85080/beginning-alamofire-tutorial) and the [AlamoFire documentation](https://github.com/Alamofire/Alamofire#response-serialization) are good resources for more information.  
 
 ### [Image Caching](https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L249)
 
 Although I've come across other image caching implementations, we're going to stick with the one described [here](http://nshipster.com/nsurlcache/).  It's simple and stable.
 
-Per the nshipster blog post, add these two lines to your `AppDelegate`.  [Example](https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/AppDelegate.swift#L20)
+Per the nshipster blog post, add these two lines to your `AppDelegate`.  [See Example](https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/AppDelegate.swift#L20)
 
 ```
 let URLCache = NSURLCache(memoryCapacity: 4 * 1024 * 1024, diskCapacity: 20 * 1024 * 1024, diskPath: "cachedResponse")
