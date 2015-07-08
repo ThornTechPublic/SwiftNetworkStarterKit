@@ -4,12 +4,12 @@ This is a sample project that integrates some popular libraries and useful netwo
 
 The aim of this is to solve the following problems as simply as possible:
 
-* Elegantly handle JSON responses
-* Cache successfully downloaded images
-* Serialize images (automatically convert NSData to UIImage)
 * Dry out network boilerplate code with a request router
-* Parameter encode for GET and POST
-* Multipart POST
+* Encode parameters for GET and POST
+* Elegantly handle JSON responses
+* Serialize images (automatically convert NSData to UIImage)
+* Cache successfully downloaded images
+* Support Multipart POST
 
 ## Using the sample project
 
