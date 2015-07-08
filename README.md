@@ -23,15 +23,13 @@ First install [AlamoFire](https://github.com/Alamofire/Alamofire) using the inst
 
 Next, install [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON).  Again, just copy the one `.swift` file from the `Source` folder into your project.
 
-Copy the two lines of code from `AppDelegate.swift` that sets up caching.  (Example)[https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/AppDelegate.swift#L20]
+Copy the two lines of code from `AppDelegate.swift` that sets up caching.  [Example](https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/AppDelegate.swift#L20)
 
 Copy the `RouterService.swift`, and customize it for your own project.
 
 ## How it works
 
-### The Router
-
-(Example)[https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L32]
+### [The Router](https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L32)
 
 This [tutorial](http://www.raywenderlich.com/85080/beginning-alamofire-tutorial) is a good resource for understanding the request router, as is the [AlamoFire documentation](https://github.com/Alamofire/Alamofire#urlrequestconvertible).  
 
@@ -117,9 +115,7 @@ The sample project makes use of AlamoFire's `ParameterEncoding.JSON.encode` for 
 
 The Router seems a little daunting at first.  But once you have the basic structure in place, it's pretty easy to add additional API calls.  The beauty of this is the ability to add tokens or set a timeoutInterval using a single point of change.
 
-### JSON Serialization
-
-(Example)[https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L98]
+### [JSON Serialization](https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L98)
 
 Handling JSON objects with Swift can get pretty ugly.  SwiftyJSON makes life much easier.
 
@@ -144,7 +140,7 @@ This lets us reach deep into the JSON object without the dreaded `if-let` pyrami
         let feedArray = json["feed"]["entry"]
 ```
 
-One neat trick with SwiftyJSON is the ability to turn a Swift dictionary into stringified JSON: (Example)[https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L98]
+One neat trick with SwiftyJSON is the ability to turn a Swift dictionary into stringified JSON: [Example](https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L98)
 
 ```
 // use SwiftyJSON to convert a dictionary to JSON
@@ -157,9 +153,7 @@ var parameterJSON = JSON([
 let parameterString = parameterJSON.rawString(encoding: NSUTF8StringEncoding, options: nil)
 ```
 
-### Image Serialization
-
-(Example)[https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L236]
+### [Image Serialization](https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L236)
 
 With image serialization, you can simply chain `.responseImage()` and expect an `UIImage` ready for use in your callback.
 
@@ -172,11 +166,11 @@ request(.GET, "http://example.com/image")
 
 This [same tutorial](http://www.raywenderlich.com/85080/beginning-alamofire-tutorial) and the [AlamoFire documentation](https://github.com/Alamofire/Alamofire#response-serialization) are good resources for more information.  
 
-### (Image Caching)[https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L249]
+### [Image Caching](https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L249)
 
 Although I've come across other image caching implementations, we're going to stick with the one described (here)[http://nshipster.com/nsurlcache/].  It's simple and stable.
 
-Per the nshipster blog post, add these two lines to your `AppDelegate`.  (Example)[https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/AppDelegate.swift#L20]
+Per the nshipster blog post, add these two lines to your `AppDelegate`.  [Example](https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/AppDelegate.swift#L20)
 
 ```
 let URLCache = NSURLCache(memoryCapacity: 4 * 1024 * 1024, diskCapacity: 20 * 1024 * 1024, diskPath: "cachedResponse")
@@ -198,9 +192,7 @@ if let contentLength = response?.allHeaderFields["Content-Length"] as? String {
 
 There are a few validations to make sure the image has downloaded completely before calling `storeCachedResponse()`
 
-### Multipart POST
-
-(Example)[https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L155]
+### [Multipart POST](https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L155)
 
 Multipart can be tediously to implement, if your API happens to use it.  Here's a (Stackoverflow article)[http://stackoverflow.com/questions/26162616/upload-image-with-parameters-in-swift] for more information.  
 
