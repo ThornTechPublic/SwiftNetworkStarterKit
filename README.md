@@ -199,7 +199,7 @@ let URLCache = NSURLCache(memoryCapacity: 4 * 1024 * 1024, diskCapacity: 20 * 10
 NSURLCache.setSharedURLCache(URLCache)
 ```
 
-Images are added to this cache using the image serializer mentioned in the section above.
+Images are added to this cache using the image serializer mentioned in the previous section.
 
 ```
 if let contentLength = response?.allHeaderFields["Content-Length"] as? String {
