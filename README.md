@@ -1,6 +1,6 @@
 # Network Starter Kit for Swift
 
-This is a sample project that integrates some popular libraries and useful networking features.  Honestly, a lot of this is taken straight from the [AlamoFire](https://github.com/Alamofire/Alamofire) README, but sometimes it helps to see code snippets in the context of a sample project.  Feel free to use this as a starter template.
+This is a sample project that integrates some popular libraries and useful networking features.  Honestly, a lot of this is just implementing instructions on the [AlamoFire](https://github.com/Alamofire/Alamofire) README, but sometimes it helps to see code snippets in the context of a sample project.  Feel free to use this as a starter template.
 
 The aim of this is to solve the following problems as simply as possible:
 
@@ -30,6 +30,88 @@ Copy the `RouterService.swift`, and customize it for your own project.
 ## How it works
 
 ### The Router
+
+This [tutorial](http://www.raywenderlich.com/85080/beginning-alamofire-tutorial) is a good resource for understanding the request router, as is the [AlamoFire documentation](https://github.com/Alamofire/Alamofire#urlrequestconvertible).  
+
+Let's examine the simplest example to see how it works.
+
+```
+enum Router: URLRequestConvertible {
+    case FetchTopFree()
+    var URLRequest: NSURLRequest {
+        let (verb: String, path: String, parameters: [String: AnyObject]?) = {
+            switch self {
+            case .FetchTopFree():
+                return ("GET", "https://itunes.apple.com/us/rss/topfreeapplications/limit=10/json", nil)
+            }
+        }()
+        let URL = NSURL(string: path)!
+        let URLRequest = NSMutableURLRequest(URL: URL)
+        URLRequest.HTTPMethod = verb
+        switch self {
+        default:
+            return ParameterEncoding.URL.encode(URLRequest, parameters: parameters).0
+        }
+    }
+}
+
+request(Router.FetchTopFree())
+    .responseJSON() { (_, _, data, _) in
+      println(data)
+    }
+```
+
+Notice how the actual `request()` call is really lightweight.  All of the URL, HTTP verb, and URL parameters are in the `NSURLRequest` object returned by the `Router`.
+
+The `Router` itself is an enum, with a `case` for each API endpoint.  For example, there's a `case FetchTopFree()` near the top.
+
+There's an intimidating section that uses a tuple:
+
+```
+        let (verb: String, path: String, parameters: [String: AnyObject]?) = {
+            switch self {
+            case .FetchTopFree():
+                return ("GET", "https://itunes.apple.com/us/rss/topfreeapplications/limit=10/json", nil)
+            }
+        }()
+```
+
+It's just a fancy way of saying this:
+
+```
+let verb = "GET"
+let path = "https://itunes.apple.com/us/rss/topfreeapplications/limit=10/json"
+let parameters = nil
+```
+
+The reason why we use the tuple with the `switch` statement is to support more `case` scenarios.
+
+The next few lines loads up these variables into a new `NSMutableURLRequest` object:
+
+```
+        let URL = NSURL(string: path)!
+        let URLRequest = NSMutableURLRequest(URL: URL)
+        URLRequest.HTTPMethod = verb
+```
+
+Finally, the last part does actually do anything in this particular example:
+
+```
+        switch self {
+        default:
+            return ParameterEncoding.URL.encode(URLRequest, parameters: parameters).0
+        }
+```
+
+We could have actually just done this:
+
+```
+return URLRequest
+```
+
+But `ParameterEncoding.URL.encode` will convert a Swift dictionary into URL parameters for GET requests.  The sample project makes use of JSON encoding for the POST HTTP body.  
+
+### Image Serialization
 
 ### Image Caching
 
