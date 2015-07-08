@@ -29,7 +29,9 @@ Copy the `RouterService.swift`, and customize it for your own project.
 
 ## How it works
 
-### (The Router)[https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L32]
+### The Router
+
+(Example)[https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L32]
 
 This [tutorial](http://www.raywenderlich.com/85080/beginning-alamofire-tutorial) is a good resource for understanding the request router, as is the [AlamoFire documentation](https://github.com/Alamofire/Alamofire#urlrequestconvertible).  
 
@@ -115,7 +117,9 @@ The sample project makes use of AlamoFire's `ParameterEncoding.JSON.encode` for 
 
 The Router seems a little daunting at first.  But once you have the basic structure in place, it's pretty easy to add additional API calls.  The beauty of this is the ability to add tokens or set a timeoutInterval using a single point of change.
 
-### (JSON Serialization)[https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L98]
+### JSON Serialization
+
+(Example)[https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L98]
 
 Handling JSON objects with Swift can get pretty ugly.  SwiftyJSON makes life much easier.
 
@@ -153,7 +157,9 @@ var parameterJSON = JSON([
 let parameterString = parameterJSON.rawString(encoding: NSUTF8StringEncoding, options: nil)
 ```
 
-### (Image Serialization)[https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L236]
+### Image Serialization
+
+(Example)[https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L236]
 
 With image serialization, you can simply chain `.responseImage()` and expect an `UIImage` ready for use in your callback.
 
@@ -192,7 +198,9 @@ if let contentLength = response?.allHeaderFields["Content-Length"] as? String {
 
 There are a few validations to make sure the image has downloaded completely before calling `storeCachedResponse()`
 
-### (Multipart POST)[https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L155]
+### Multipart POST
+
+(Example)[https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L155]
 
 Multipart can be tediously to implement, if your API happens to use it.  Here's a (Stackoverflow article)[http://stackoverflow.com/questions/26162616/upload-image-with-parameters-in-swift] for more information.  
 
