@@ -168,7 +168,7 @@ This [same tutorial](http://www.raywenderlich.com/85080/beginning-alamofire-tuto
 
 ### [Image Caching](https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L249)
 
-Although I've come across other image caching implementations, we're going to stick with the one described (here)[http://nshipster.com/nsurlcache/].  It's simple and stable.
+Although I've come across other image caching implementations, we're going to stick with the one described [here](http://nshipster.com/nsurlcache/).  It's simple and stable.
 
 Per the nshipster blog post, add these two lines to your `AppDelegate`.  [Example](https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/AppDelegate.swift#L20)
 
