@@ -155,8 +155,47 @@ let parameterString = parameterJSON.rawString(encoding: NSUTF8StringEncoding, op
 
 ### Image Serialization
 
+With image serialization, you can simply chain `.responseImage()` and expect an `UIImage` ready for use in your callback.
+
+```
+request(.GET, "http://example.com/image")
+    .responseImage() { (_, _, image, _) in
+        cell.imageView?.image = image
+    }
+```
+
+This [same tutorial](http://www.raywenderlich.com/85080/beginning-alamofire-tutorial) and the [AlamoFire documentation](https://github.com/Alamofire/Alamofire#response-serialization) are good resources for more information.  
+
 ### Image Caching
+
+Although I've come across other image caching implementations, we're going to stick with the one described (here)[http://nshipster.com/nsurlcache/].  It's simple and stable.
+
+Per the nshipster blog post, add these two lines to your `AppDelegate`
+
+```
+let URLCache = NSURLCache(memoryCapacity: 4 * 1024 * 1024, diskCapacity: 20 * 1024 * 1024, diskPath: "cachedResponse")
+NSURLCache.setSharedURLCache(URLCache)
+```
+
+Images are added to this cache using the image serializer mentioned in the section above.
+
+```
+if let contentLength = response?.allHeaderFields["Content-Length"] as? String {
+    if let data = data {
+        if contentLength == "\(data.length)" {
+            let cachedURLResponse = NSCachedURLResponse(response: response!, data: (data as NSData), userInfo: nil, storagePolicy: .Allowed)
+            NSURLCache.sharedURLCache().storeCachedResponse(cachedURLResponse, forRequest: request)
+        }
+    }
+}
+```
+
+There are a few validations to make sure the image has downloaded completely before calling `storeCachedResponse()`
 
 ### Multipart POST
 
+Multipart can be tediously to implement, if your API happens to use it.  Here's a (Stackoverflow article)[http://stackoverflow.com/questions/26162616/upload-image-with-parameters-in-swift] for more information.  
 
+Say you need to upload both an image and POST information like a title and description.  The image is binary, but the rest of the HTTP POST body is text.  
+
+Multipart simply requires everything to be in binary.  In the sample project, you start with header strings converted to binary.  Then you tack on the JSON stringified form data, converted to binary.  Then append more header binary strings.  Finally you can add the image data, which is already in binary.  There's a handy `NSMutableData` extension from the Stackoverflow article that makes appending a string as binary very easy.
