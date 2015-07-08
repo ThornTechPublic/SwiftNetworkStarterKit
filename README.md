@@ -94,7 +94,7 @@ The next few lines loads up these variables into a new `NSMutableURLRequest` obj
         URLRequest.HTTPMethod = verb
 ```
 
-Finally, the last part doesn't actually do anything in this particular example:
+Finally, the last part doesn't do anything in this particular example, since `parameters` is nil:
 
 ```
         switch self {
@@ -109,7 +109,7 @@ We could have actually just done this:
 return URLRequest
 ```
 
-But if we actually had parameters, `ParameterEncoding.URL.encode` will convert a Swift dictionary `[ "foo" : "bar" ]` into URL parameters `?foo=bar` for GET requests.  
+But if we had parameters, `ParameterEncoding.URL.encode` will convert a Swift dictionary `[ "foo" : "bar" ]` into URL parameters `?foo=bar` for GET requests.  
 
 The sample project makes use of AlamoFire's JSON encoding for the POST HTTP body.  
 
