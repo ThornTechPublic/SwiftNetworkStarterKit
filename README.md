@@ -196,6 +196,6 @@ There are a few validations to make sure the image has downloaded completely bef
 
 Multipart can be tediously to implement, if your API happens to use it.  Here's a [Stackoverflow article](http://stackoverflow.com/questions/26162616/upload-image-with-parameters-in-swift) for more information.  
 
-Say you need to upload both an image and POST information like a title and description.  The image is binary, but the rest of the HTTP POST body is text.  
+Say you need to upload both an image and form data.  The mixture of binary and text can be problematic.  You could convert the image into a huge string (a picture is worth a thousand words...) but there could be server limits on POST size. 
 
-Multipart simply requires everything to be in binary.  In the sample project, you start with header strings converted to binary.  Then you tack on the JSON stringified form data, converted to binary.  Then append more header binary strings.  Finally you can add the image data, which is already in binary.  There's a handy `NSMutableData` extension from the Stackoverflow article that makes appending a string as binary very easy.
+The alternative is to use Multipart, which simply requires everything to be in binary.  In the sample project, you start with header strings converted to binary.  Then you tack on the JSON stringified form data, converted to binary.  Then append more header binary strings.  Finally you can add the image data, which is already in binary.  There's a handy `NSMutableData` extension from the Stackoverflow article that makes appending a string as binary very easy.
