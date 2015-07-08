@@ -108,7 +108,7 @@ let parameters = nil
 
 The reason why we use the tuple with the `switch` statement is to support more `case` scenarios.
 
-The next few lines loads up these variables into a new `NSMutableURLRequest` object:
+The next few lines loads up the variables for the URL and HTTP verb into a new `NSMutableURLRequest` object:
 
 ```
         let URL = NSURL(string: path)!
@@ -131,7 +131,7 @@ We could have actually just done this:
 return URLRequest
 ```
 
-But if we had parameters, `ParameterEncoding.URL.encode` will convert a Swift dictionary `[ "foo" : "bar" ]` into URL parameters `?foo=bar` for GET requests.  
+But if we had parameters, `ParameterEncoding.URL.encode` would convert a Swift dictionary `[ "foo" : "bar" ]` into URL parameters `?foo=bar` for GET requests.  
 
 The sample project makes use of AlamoFire's `ParameterEncoding.JSON.encode` for the POST HTTP body.  
 
@@ -139,7 +139,7 @@ The Router seems a little daunting at first.  But once you have the basic struct
 
 ### [JSON Serialization](https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L98)
 
-Handling JSON objects with Swift can get pretty ugly.  SwiftyJSON makes life much easier.
+Handling JSON objects with Swift can get pretty ugly.  SwiftyJSON makes life much easier.  Here's a good [tutorial to learn more](http://www.raywenderlich.com/82706/working-with-json-in-swift-tutorial).
 
 ```
 request(Router.FetchTopFree())
