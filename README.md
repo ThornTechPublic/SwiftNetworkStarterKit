@@ -61,7 +61,7 @@ request(Router.FetchTopFree())
     }
 ```
 
-Notice how the actual `request()` call is really lightweight.  All of the URL, HTTP verb, and URL parameters are in the `NSURLRequest` object returned by the `Router`.
+Notice how the actual `request()` call is really lightweight.  All of the URL, HTTP verb, and URL parameters are baked into the `NSURLRequest` object that gets returned by the `Router`.
 
 The `Router` itself is an enum, with a `case` for each API endpoint.  For example, there's a `case FetchTopFree()` near the top.
 
@@ -94,7 +94,7 @@ The next few lines loads up these variables into a new `NSMutableURLRequest` obj
         URLRequest.HTTPMethod = verb
 ```
 
-Finally, the last part does actually do anything in this particular example:
+Finally, the last part doesn't actually do anything in this particular example:
 
 ```
         switch self {
