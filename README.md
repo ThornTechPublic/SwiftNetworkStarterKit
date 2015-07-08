@@ -1,6 +1,6 @@
 # Network Starter Kit for Swift
 
-This is a sample project that integrates some popular libraries and useful networking features.  Honestly, a lot of this is just implementing instructions on the [AlamoFire](https://github.com/Alamofire/Alamofire) README, but sometimes it helps to see code snippets in the context of a sample project.  Feel free to use this as a starter template.
+This is a sample project that integrates some popular libraries and useful networking features.  Admittedly, a lot of this is just implementing instructions on the [AlamoFire](https://github.com/Alamofire/Alamofire) README, but sometimes it helps to see code snippets in action.  Feel free to use this as a starter template.
 
 The aim of this is to solve the following problems as simply as possible:
 
@@ -13,7 +13,7 @@ The aim of this is to solve the following problems as simply as possible:
 
 ## Using the sample project
 
-The working demo grabs the top 10 free and paid apps from the iTunes API.  The right and left bar buttons perform a POST and multipart POST, with the response logged to the console.
+The working demo grabs the top 10 free and paid apps from the iTunes API.  The right and left corner buttons perform a POST and multipart POST, with the response logged to the console.
 
 ![animated gif demo](https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/githubImages/networkMashupDemo.gif)
 
@@ -23,9 +23,31 @@ First install [AlamoFire](https://github.com/Alamofire/Alamofire) using the inst
 
 Next, install [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON).  Again, just copy the one `.swift` file from the `Source` folder into your project.
 
-Copy the two lines of code from `AppDelegate.swift` that sets up caching.  [Example](https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/AppDelegate.swift#L20)
+Copy the two lines of code from `AppDelegate.swift` that sets up caching.  [See Example](https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/AppDelegate.swift#L20)
 
-Copy the `RouterService.swift`, and customize it for your own project.
+Copy the `RouterService.swift` file, and customize it for your own project.
+
+## Usage
+
+To make an API call, invoke one of the methods in the router:
+
+```
+RouterService.sharedInstance.fetchTopFree(){ success, appCollection in
+    self.appCollectionResponse = appCollection
+    self.tableView.reloadData()
+}
+```
+
+To download an image, just request an imageURL and assign the image:
+
+```
+request(.GET, "http://example.com/imageURL")
+    .responseImage() { (_, _, image, error) in
+        if error == nil && image != nil {
+            cell.imageView?.image = image
+        }
+    }
+```
 
 ## How it works
 
