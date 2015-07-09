@@ -53,7 +53,7 @@ request(.GET, "http://example.com/imageURL")
 
 ### [The Router](https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L32)
 
-This [tutorial](http://www.raywenderlich.com/85080/beginning-alamofire-tutorial) is a good resource for understanding the request router, as is the [AlamoFire documentation](https://github.com/Alamofire/Alamofire#urlrequestconvertible).  
+This [tutorial](http://www.raywenderlich.com/85080/beginning-alamofire-tutorial) is a good resource for understanding the request router, as well as the [AlamoFire documentation](https://github.com/Alamofire/Alamofire#urlrequestconvertible).  
 
 Let's examine the simplest example to see how it works.
 
@@ -106,7 +106,7 @@ let path = "https://itunes.apple.com/us/rss/topfreeapplications/limit=10/json"
 let parameters = nil
 ```
 
-The reason why we use the tuple with the `switch` statement is to support more `case` scenarios.
+The nice thing about using a tuple with the `switch` statement is tight, readable syntax even with multiple cases.
 
 The next few lines loads up the variables for the URL and HTTP verb into a new `NSMutableURLRequest` object:
 
