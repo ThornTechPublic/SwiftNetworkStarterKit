@@ -135,7 +135,7 @@ But if we had parameters, `ParameterEncoding.URL.encode` would convert a Swift d
 
 The sample project makes use of AlamoFire's `ParameterEncoding.JSON.encode` for the POST HTTP body.  
 
-The Router seems a little daunting at first.  But once you have the basic structure in place, it's pretty easy to add additional API calls.  The beauty of this is the ability to add tokens or set a timeoutInterval using a single point of change.
+The Router seems a little daunting at first.  But once you have the basic structure in place, it's pretty easy to add additional API calls.  This setup is scalable because there's a single point of change should you need to add auth tokens or set a `timoutInterval`.
 
 ### [JSON Serialization](https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L98)
 
