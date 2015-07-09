@@ -106,7 +106,7 @@ let path = "https://itunes.apple.com/us/rss/topfreeapplications/limit=10/json"
 let parameters = nil
 ```
 
-The nice thing about using a tuple with the `switch` statement is tight, readable syntax even with multiple cases.
+The nice thing about using a tuple with the `switch` statement is that the syntax stays tight even as you add more API endpoints.
 
 The next few lines loads up the variables for the URL and HTTP verb into a new `NSMutableURLRequest` object:
 
