@@ -19,9 +19,9 @@ The working demo grabs the top 10 free and paid apps from the iTunes API.  The r
 
 ## Integration
 
-First install [AlamoFire](https://github.com/Alamofire/Alamofire) using the instructions on their README.  I prefer to simply copy all the `.swift` files from the `Source` folder.
+First download and unzip [AlamoFire](https://github.com/Alamofire/Alamofire).  For installation, I prefer to simply copy all the `.swift` files from their `Source` folder.
 
-Next, install [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON).  Again, just copy the one `.swift` file from the `Source` folder into your project.
+Next, download and unzip [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON).  Again, you can just copy the one `.swift` file from their `Source` folder into your project.
 
 Copy the two lines of code from `AppDelegate.swift` that sets up caching.  [See Example](https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/AppDelegate.swift#L20)
 
@@ -53,7 +53,9 @@ request(.GET, "http://example.com/imageURL")
 
 ### [The Router](https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L32)
 
-This [tutorial](http://www.raywenderlich.com/85080/beginning-alamofire-tutorial) is a good resource for understanding the request router, as well as the [AlamoFire documentation](https://github.com/Alamofire/Alamofire#urlrequestconvertible).  
+The router is an `URLRequestConvertible`. This lets you call an enum and get back a fully configured request object. Of course, it's up to you to programmatically set the URL, verb, POST parameters, timeouts, tokens, etc. 
+
+Besides the [AlamoFire documentation](https://github.com/Alamofire/Alamofire#urlrequestconvertible), this [Ray Wenderlich tutorial](http://www.raywenderlich.com/85080/beginning-alamofire-tutorial) is a good resource to learn more.  
 
 Let's examine the simplest example to see how it works.
 
