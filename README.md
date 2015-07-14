@@ -248,32 +248,32 @@ multipartFormData.appendBodyPart(fileData: jsonParameterData!, name: "goesIntoFi
 For the JSON payload, first use SwiftyJSON to convert a dictionary to JSON.
 
 ```
-        var parameterJSON = JSON([
-            "title": "foo",
-            "description": "bar"
-        ])
+var parameterJSON = JSON([
+    "title": "foo",
+    "description": "bar"
+])
 ```
 
 Then stringify the JSON:
 
 ```
-        let parameterString = parameterJSON.rawString(encoding: NSUTF8StringEncoding, options: nil)
+let parameterString = parameterJSON.rawString(encoding: NSUTF8StringEncoding, options: nil)
 ```
 
 We're doing multipart, so convert the string to binary:
 
 ```
-        let jsonParameterData = parameterString!.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
+let jsonParameterData = parameterString!.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
 ```
 
 Finally, add the JSON as a `file`:
 
 ```
-                multipartFormData.appendBodyPart(fileData: jsonParameterData!, name: "goesIntoFile", fileName: "json.txt", mimeType: "application/json")
+multipartFormData.appendBodyPart(fileData: jsonParameterData!, name: "goesIntoFile", fileName: "json.txt", mimeType: "application/json")
 ```
 
 Or depending on how your API endpoint is setup, insert the JSON into the `form`:
 
 ```
-                multipartFormData.appendBodyPart(data: jsonParameterData!, name: "goesIntoForm")
+multipartFormData.appendBodyPart(data: jsonParameterData!, name: "goesIntoForm")
 ```
