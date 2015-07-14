@@ -220,8 +220,60 @@ There are a few validations to make sure the image has downloaded completely bef
 
 ### [Multipart POST](https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L155)
 
-Multipart can be tediously to implement, if your API happens to use it.  Here's a [Stackoverflow article](http://stackoverflow.com/questions/26162616/upload-image-with-parameters-in-swift) for more information.  
-
 Say you need to upload both an image and form data.  The mixture of binary and text can be problematic.  You could convert the image into a huge base64 string (a picture is worth a thousand words...) so that the entire POST body is text.  But there could be server limits on POST size. 
 
-The alternative is to use Multipart, which simply requires everything to be in binary.  This means all the headers and form data need to be in binary format.  In the sample project, you start with headers and convert them to binary.  Then you convert JSON stringified form data to binary, and append it.  Then you convert more headers to binary, and append them.  Finally you can append the image data, which is already in binary.  There's a handy `NSMutableData` extension from the Stackoverflow article that makes appending a string as binary very easy.
+The alternative is to use Multipart, which simply requires everything to be in binary.  This means all the headers and form data need to be in binary format.  We included a working example of using Multipart with AlamoFire.  
+
+The multipart HTTP body has different pieces to it:
+
+```
+{
+    files : {
+        file : "data:image/jpg;base64,/9j/4AAQ...2Q=="
+    },
+    form : {
+        payload : "{ 
+            \"foo\":\"bar\"
+        }"
+    }
+}
+```
+
+To put the image binary inside of `files`, use the `fileData` API call:
+
+```
+multipartFormData.appendBodyPart(fileData: jsonParameterData!, name: "goesIntoFile", fileName: "json.txt", mimeType: "application/json")
+```
+
+For the JSON payload, first use SwiftyJSON to convert a dictionary to JSON.
+
+```
+        var parameterJSON = JSON([
+            "title": "foo",
+            "description": "bar"
+        ])
+```
+
+Then stringify the JSON:
+
+```
+        let parameterString = parameterJSON.rawString(encoding: NSUTF8StringEncoding, options: nil)
+```
+
+We're doing multipart, so convert the string to binary:
+
+```
+        let jsonParameterData = parameterString!.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
+```
+
+Finally, add the JSON as a `file`:
+
+```
+                multipartFormData.appendBodyPart(fileData: jsonParameterData!, name: "goesIntoFile", fileName: "json.txt", mimeType: "application/json")
+```
+
+Or depending on how your API endpoint is setup, insert the JSON into the `form`:
+
+```
+                multipartFormData.appendBodyPart(data: jsonParameterData!, name: "goesIntoForm")
+```
