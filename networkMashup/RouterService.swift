@@ -35,7 +35,7 @@ class RouterService {
         case FetchTopFree()
         case FetchTopPaid()
         case CreatePost(params: [String: AnyObject])
-        case CreateMultipart(contentType: String, payload: NSMutableData)
+        case CreateMultipart()
         
         // each case above needs to be implemented here.
         var URLRequest: NSURLRequest {
@@ -70,10 +70,10 @@ class RouterService {
                 // JSON encode the parameters
                 return ParameterEncoding.JSON.encode(URLRequest, parameters: parameters).0
             // Multipart POST needs a special "Content-Type" header to define the boundary between JSON and Image Data.
-            case .CreateMultipart(let contentType, let payload):
-                // Multipart form.  Set content type and pass along the body (NSData).  JSON params are embedded in data.
-                URLRequest.setValue(contentType, forHTTPHeaderField: "Content-Type")
-                URLRequest.HTTPBody = payload
+            case .CreateMultipart():
+                // we have the URL and HTTP verb.
+                // no need to mess with parameter encoding
+                // because all the form and file data gets set in the upload() method.
                 return URLRequest
             // Everything else is GET.  The JSON gets URL encoded.
             default:
@@ -164,69 +164,38 @@ class RouterService {
         
         // JSON stringify
         let parameterString = parameterJSON.rawString(encoding: NSUTF8StringEncoding, options: nil)
-        
-        // Set Content-Type in HTTP header.
-        let boundaryConstant = "---------------------------126394370319358019764645774"; // This number probably should be auto-generated.
-        let contentType = "multipart/form-data; boundary=" + boundaryConstant
-        let mimeType = "image/jpg"
-        
-        // TODO: You want to set the fieldName to what your API accepts
-        let fieldName = "file"
+        let jsonParameterData = parameterString!.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
         
         let imageData = UIImageJPEGRepresentation(image, 0.7)
         
-        // Example of what it might look like:
+        upload(
+            Router.CreateMultipart(),
+            multipartFormData: { multipartFormData in
+                // fileData: puts it in "files"
+                multipartFormData.appendBodyPart(fileData: jsonParameterData!, name: "goesIntoFile", fileName: "json.txt", mimeType: "application/json")
+                multipartFormData.appendBodyPart(fileData: imageData, name: "file", fileName: "iosFile.jpg", mimeType: "image/jpg")
+                // data: puts it in "form"
+                multipartFormData.appendBodyPart(data: jsonParameterData!, name: "goesIntoForm")
+            },
+            encodingCompletion: { encodingResult in
+                switch encodingResult {
+                case .Success(let upload, _, _):
+                    upload.responseJSON { request, response, data, error in
+                        println("request:: \(request)")
+                        println("response:: \(response)")
+                        println("data:: \(data)")
+                        println("error:: \(error)")
+                        
+                        let json = JSON(data!)
+                        println("json:: \(json)")
+                        callback(true)
+                    }
+                case .Failure(let encodingError):
+                    callback(false)                }
+            }
+        )
         
-        //            -----------------------------126394370319358019764645774
-        //            Content-Disposition: form-data;
-        //            Content-Type: application/json
-        //
-        //            { "title":"foo", "description":"bar" }
-        //            -----------------------------126394370319358019764645774
-        //            Content-Disposition: form-data; name="file"; filename="TwitterIcon.png"
-        //            Content-Type: image/png
         
-        // Set data
-        var error: NSError?
-        var dataString = NSMutableData()
-        // This "appendString" method is not a real method.
-        // We're using an extension on NSMutableData (scroll down to the bottom).
-        // It makes the code easier to read.
-        dataString.appendString("--\(boundaryConstant)")
-        dataString.appendString("\r\n")
-        dataString.appendString("Content-Disposition: form-data;")
-        dataString.appendString("\r\n")
-        dataString.appendString("Content-Type: application/json")
-        dataString.appendString("\r\n")
-        dataString.appendString("\r\n")
-        // This is your stringified JSON
-        dataString.appendString(parameterString!)
-        dataString.appendString("\r\n")
-        dataString.appendString("--\(boundaryConstant)")
-        dataString.appendString("\r\n")
-        dataString.appendString("Content-Disposition: form-data; name=\"\(fieldName)\"; filename=\"iosFile.jpg\"")
-        dataString.appendString("\r\n")
-        dataString.appendString("Content-Type: \(mimeType)")
-        dataString.appendString("\r\n")
-        dataString.appendString("\r\n")
-        dataString.appendData(imageData!)
-        dataString.appendString("\r\n")
-        dataString.appendString("--\(boundaryConstant)--")
-        dataString.appendString("\r\n")
-        
-        request(Router.CreateMultipart(contentType: contentType, payload: dataString))
-            .responseJSON() { (request, response, data, error) in
-                if error != nil {
-                    // error condition.  for example, user is offline.
-                    // indicate the call was unsuccessful.
-                    callback(false)
-                } else {
-                    // convert the response using swiftyJSON
-                    let json = JSON(data!)
-                    println("json:: \(json)")
-                    callback(true)
-                }
-        }
     }
     
 }
