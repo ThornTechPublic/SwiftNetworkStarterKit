@@ -190,6 +190,8 @@ request(.GET, "http://example.com/image")
 
 A [previously mentioned tutorial](http://www.raywenderlich.com/85080/beginning-alamofire-tutorial) and the [AlamoFire documentation](https://github.com/Alamofire/Alamofire#response-serialization) are good resources for more information.  
 
+Also, don't forget to add some [safety checks](https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L247) to `UIImage` since it's not thread-safe.
+
 ### [Image Caching](https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L249)
 
 Although I've come across other image caching implementations, we're going to stick with the one described [here](http://nshipster.com/nsurlcache/).  It's simple and stable.
