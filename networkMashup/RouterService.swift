@@ -210,26 +210,25 @@ extension Request {
             
             if data == nil || response == nil {
                 return (nil, nil)
-            }
-            
-            // Cache only if the image downloaded completely.  Otherwise, you end up caching corrupt images in poor network situations.
-            // Check if the Content-Length exactly matches the data.length.
-            // Remember there are two lines in the AppDelegate to setup the NSURLCache.
-            if let contentLength = response?.allHeaderFields["Content-Length"] as? String {
-                if let data = data {
-                    if contentLength == "\(data.length)" {
-                        // caches NSData response
-                        let cachedURLResponse = NSCachedURLResponse(response: response!, data: (data as NSData), userInfo: nil, storagePolicy: .Allowed)
-                        NSURLCache.sharedURLCache().storeCachedResponse(cachedURLResponse, forRequest: request)
-                    } else {
-                        println("dont cache this image!!!")
+            } else {
+                // Cache only if the image downloaded completely.  Otherwise, you end up caching corrupt images in poor network situations.
+                // Check if the Content-Length exactly matches the data.length.
+                // Remember there are two lines in the AppDelegate to setup the NSURLCache.
+                if let contentLength = response?.allHeaderFields["Content-Length"] as? String {
+                    if let data = data {
+                        if contentLength == "\(data.length)" {
+                            // UIImage class method is not thread-safe. See UIImage extension below.
+                            let image = UIImage.safeImageWithData(data)
+                            
+                            // caches NSData response
+                            let cachedURLResponse = NSCachedURLResponse(response: response!, data: (data as NSData), userInfo: nil, storagePolicy: .Allowed)
+                            NSURLCache.sharedURLCache().storeCachedResponse(cachedURLResponse, forRequest: request)
+                            return (image, nil)
+                        }
                     }
                 }
+                return (nil, nil)
             }
-            
-            // scales the image to screen size
-            let image = UIImage(data: data!, scale: UIScreen.mainScreen().scale)
-            return (image, nil)
         }
     }
     /// Turns Data into UIImage
@@ -238,4 +237,18 @@ extension Request {
             completionHandler(request, response, image as? UIImage, error)
         })
     }
+}
+
+// see https://github.com/Haneke/HanekeSwift/pull/207/files
+private let imageSync = NSLock()
+
+extension UIImage {
+    
+    static func safeImageWithData(data:NSData) -> UIImage? {
+        imageSync.lock()
+        let image = UIImage(data:data)
+        imageSync.unlock()
+        return image
+    }
+    
 }
