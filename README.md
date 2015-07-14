@@ -190,7 +190,7 @@ request(.GET, "http://example.com/image")
 
 A [previously mentioned tutorial](http://www.raywenderlich.com/85080/beginning-alamofire-tutorial) and the [AlamoFire documentation](https://github.com/Alamofire/Alamofire#response-serialization) are good resources for more information.  
 
-Also, don't forget to add some [safety checks](https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L247) to `UIImage` since it's not thread-safe.
+Also, don't forget to add some [safety checks](https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L247) to `UIImage`.  Since `UIImage` is not thread-safe, it will intermittently crash as you convert an incoming barrage of image requests.
 
 ### [Image Caching](https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L249)
 
