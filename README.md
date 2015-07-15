@@ -63,15 +63,20 @@ Let's examine the simplest example to see how it works.
 enum Router: URLRequestConvertible {
     case FetchTopFree()
     var URLRequest: NSURLRequest {
+        // verbs, URLs, and params
         let (verb: String, path: String, parameters: [String: AnyObject]?) = {
             switch self {
             case .FetchTopFree():
                 return ("GET", "https://itunes.apple.com/us/rss/topfreeapplications/limit=10/json", nil)
             }
         }()
+        // creating the request.
+        // set the verb and URL.
+        // also set headers here too.
         let URL = NSURL(string: path)!
         let URLRequest = NSMutableURLRequest(URL: URL)
         URLRequest.HTTPMethod = verb
+        // encode the params
         switch self {
         default:
             return ParameterEncoding.URL.encode(URLRequest, parameters: parameters).0
