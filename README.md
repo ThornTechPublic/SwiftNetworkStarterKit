@@ -38,7 +38,7 @@ RouterService.sharedInstance.fetchTopFree(){ success, appCollection in
 }
 ```
 
-To download an image, just request an imageURL and assign the image:
+To download an image, just request an imageURL and use the `responseImage()` serializer:
 
 ```
 request(.GET, "http://example.com/imageURL")
