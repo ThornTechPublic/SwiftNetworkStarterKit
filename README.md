@@ -146,7 +146,7 @@ The Router seems a little daunting at first.  But once you have the basic struct
 
 ### [JSON Serialization](https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L98)
 
-Handling JSON objects with Swift can get pretty ugly.  SwiftyJSON makes life much easier.  Here's a good [tutorial if you want to learn more](http://www.raywenderlich.com/82706/working-with-json-in-swift-tutorial).
+Handling JSON objects with Swift can get pretty ugly, but SwiftyJSON makes life much easier.  Here's a good [tutorial if you want to learn more](http://www.raywenderlich.com/82706/working-with-json-in-swift-tutorial).
 
 ```
 request(Router.FetchTopFree())
