@@ -252,7 +252,7 @@ To put the image binary inside of `files`, use the `fileData` parameter:
 multipartFormData.appendBodyPart(fileData: imageData, name: "file", fileName: "iosFile.jpg", mimeType: "image/jpg")
 ```
 
-For the JSON payload, first use SwiftyJSON to convert a dictionary to JSON.
+For the JSON payload, we need to do some converting before appending the body part.  First use SwiftyJSON to convert a dictionary to JSON.
 
 ```
 var parameterJSON = JSON([
