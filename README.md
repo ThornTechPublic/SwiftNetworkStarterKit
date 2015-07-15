@@ -169,7 +169,7 @@ This lets us reach deep into the JSON object without the dreaded `if-let` pyrami
         let feedArray = json["feed"]["entry"]
 ```
 
-One neat trick with SwiftyJSON is the ability to turn a Swift dictionary into stringified JSON. [See Example](https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L98)
+One neat trick with SwiftyJSON is the ability to turn a Swift dictionary into stringified JSON, which comes in handy for multipart. [See Example](https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L98)
 
 ```
 // use SwiftyJSON to convert a dictionary to JSON
