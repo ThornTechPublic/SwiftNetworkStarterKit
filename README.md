@@ -53,7 +53,7 @@ request(.GET, "http://example.com/imageURL")
 
 ### [The Router](https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L32)
 
-The router is an `URLRequestConvertible`. This lets you call an enum and get back a fully configured request object. Of course, it's up to you to programmatically set the URL, verb, POST parameters, timeouts, tokens, etc. 
+The router is an `URLRequestConvertible`. This lets you call an enum and get back a fully configured request object. Although, it's up to you to programmatically set the URL, verb, POST parameters, timeouts, tokens, etc. 
 
 Besides the [AlamoFire documentation](https://github.com/Alamofire/Alamofire#urlrequestconvertible), this [Ray Wenderlich tutorial](http://www.raywenderlich.com/85080/beginning-alamofire-tutorial) is a good resource to learn more.  
 
