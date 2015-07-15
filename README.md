@@ -249,7 +249,7 @@ The multipart HTTP body has different "parts" to it:
 To put the image binary inside of `files`, use the `fileData` parameter:
 
 ```
-multipartFormData.appendBodyPart(fileData: jsonParameterData!, name: "goesIntoFile", fileName: "json.txt", mimeType: "application/json")
+multipartFormData.appendBodyPart(fileData: imageData, name: "file", fileName: "iosFile.jpg", mimeType: "image/jpg")
 ```
 
 For the JSON payload, first use SwiftyJSON to convert a dictionary to JSON.
