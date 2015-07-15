@@ -225,11 +225,11 @@ There are a few validations to make sure the image has downloaded completely bef
 
 ### [Multipart POST](https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/RouterService.swift#L155)
 
-Say you need to upload both an image and form data.  The mixture of binary and text can be problematic.  You could convert the image into a huge base64 string (a picture is worth a thousand words...) so that the entire POST body is text.  But there could be server limits on POST size. 
+Say you need to upload both image and text in a single API call.  You can't really mix binary with text, so one approach is to go all-text.  This means converting the image into a huge base64 string (a picture is worth a thousand words...).  This approach is limited, depending on the server's maximum POST size. 
 
-The alternative is to use Multipart, which simply requires everything to be in binary.  This means all the headers and form data need to be in binary format.  We included a working example of using Multipart with AlamoFire.  
+The alternative is to use Multipart, which requires everything to be in binary.  This means all the headers and form data need to be converted to binary.  We included a working example of using Multipart with AlamoFire.  
 
-The multipart HTTP body has different pieces to it:
+The multipart HTTP body has different "parts" to it:
 
 ```
 {
@@ -240,11 +240,13 @@ The multipart HTTP body has different pieces to it:
         payload : "{ 
             \"foo\":\"bar\"
         }"
-    }
+    },
+    args : {},
+    json : null
 }
 ```
 
-To put the image binary inside of `files`, use the `fileData` API call:
+To put the image binary inside of `files`, use the `fileData` parameter:
 
 ```
 multipartFormData.appendBodyPart(fileData: jsonParameterData!, name: "goesIntoFile", fileName: "json.txt", mimeType: "application/json")
