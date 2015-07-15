@@ -21,7 +21,7 @@ The working demo grabs the top 10 free and paid apps from the iTunes API.  The r
 
 First download [AlamoFire](https://github.com/Alamofire/Alamofire).  To install, follow the instructions on their readme.  I prefer to simply copy all the `.swift` files from their `Source` folder.
 
-Next, download [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON).  Again, I find it easier to just copy the one `.swift` file from their `Source` folder into the project.
+Next, download [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON).  Again, you can just copy the one `.swift` file from their `Source` folder into the project.
 
 Copy the two lines of code from `AppDelegate.swift` that sets up caching.  [See Example](https://github.com/ThornTechPublic/SwiftNetworkStarterKit/blob/master/networkMashup/AppDelegate.swift#L20)
 
