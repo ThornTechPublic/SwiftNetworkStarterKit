@@ -2,6 +2,8 @@
 
 This is a sample project that integrates some popular libraries and useful networking features.  Admittedly, a lot of this is just implementing instructions on the [AlamoFire](https://github.com/Alamofire/Alamofire) README, but sometimes it helps to see code snippets in action.  Feel free to use this as a starter template.
 
+This repo is tied to this [blog post](http://www.thorntech.com/2015/07/4-essential-swift-networking-tools-for-working-with-rest-apis/).
+
 The aim of this is to solve the following problems as simply as possible:
 
 * Dry out network boilerplate code with a request router
