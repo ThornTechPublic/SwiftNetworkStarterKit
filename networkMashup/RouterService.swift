@@ -11,18 +11,8 @@ import Foundation
 
 class RouterService {
     
-    // see http://code.martinrue.com/posts/the-singleton-pattern-in-swift for thread-safe singletons
-    // although the link appears to be down
-    class var sharedInstance: RouterService {
-        struct Static {
-            static var instance: RouterService?
-            static var token: dispatch_once_t = 0
-        }
-        dispatch_once(&Static.token) {
-            Static.instance = RouterService()
-        }
-        return Static.instance!
-    }
+    // Singleton.  See http://krakendev.io/blog/the-right-way-to-write-a-singleton
+    static let sharedInstance = RouterService()
     
     // see AlamoFire readme for more details
     // https://github.com/Alamofire/Alamofire
